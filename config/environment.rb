@@ -3,7 +3,7 @@ require 'active_record'
 
 ROOT = Pathname(File.expand_path('../..', __FILE__))
 
-%w[lib].each do |path|
+%w[lib lib/models].each do |path|
   ActiveSupport::Dependencies.autoload_paths << ROOT.join(path)
 end
 
