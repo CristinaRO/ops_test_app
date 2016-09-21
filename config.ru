@@ -1,10 +1,5 @@
+require File.expand_path('../config/environment', __FILE__)
+
 require 'sinatra'
-
-def application_path
-  File.expand_path('../lib', __FILE__)
-end
-$LOAD_PATH.unshift application_path
-
-require 'ops_test_app'
 
 run OpsTestApp.new
