@@ -9,5 +9,6 @@ end
 
 ActiveRecord::Base.establish_connection \
   adapter:  'mysql2',
-  username: 'root',
+  username: ENV.fetch('MYSQL_USERNAME'),
+  password: ENV.fetch('MYSQL_PASSWORD'),
   database: 'ops_test'
