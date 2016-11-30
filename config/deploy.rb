@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
-lock '3.5.0'
+lock '3.6.1'
 
 set :application, 'ops_test_app'
-set :repo_url, 'git://github.com/eightbitraptor/ops_test_app.git'
+set :repo_url, 'git@github.com:jcoglan/ops_test_app.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -36,8 +36,14 @@ set :repo_url, 'git://github.com/eightbitraptor/ops_test_app.git'
 # set :keep_releases, 5
 
 namespace :deploy do
+
   task :restart do
+    on roles(:app) do
+      sudo :service, 'my-demo-job', :restart
+    end
   end
+
+  after :cleanup, :restart
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
